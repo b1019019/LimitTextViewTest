@@ -18,10 +18,9 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         textView1.delegate = self
-        textView1.text = "mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmwtwmtmwtmwmtmwmrmgwegbwdfdfmggmfmfmfrsfdmdsrfsmfmsmfrmsfmgrmsfmgmsfmgmsfmsmmgmsgmmwmrmgrmsmgmsmgmsmmgsmmgsmgmsmmgmsmgmsmfgmsmmg"
+        textView1.text = "mmmmmmmmmmmmmmあぁjファjファlfJALfJALfJALjファjファlfじゃfJALfじゃfファfffじゃdkjふぁlkfdじゃlkfじゃlfかjkfじゃkfjじゃじゃじゃじゃじゃっじゃじゃじゃじゃっじゃじゃじゃじゃじゃじゃじゃっじゃじ"
         print(textView1.contentHuggingPriority(for: .vertical))
         print(textView1.contentCompressionResistancePriority(for: .vertical))
-        textView1.setContentHuggingPriority(UILayoutPriority.required, for: .vertical)
         textViewDidChange(textView1)
         
     }
@@ -30,7 +29,32 @@ class ViewController: UIViewController {
     override func viewWillLayoutSubviews() {
         //intrinsticContentSizeを元にオートレイアウトを計算する
         //ハギングとコンプレッションの優先度以上にする。
+        var printnum = 0
         print("intrinstic",textView1.intrinsicContentSize)
+        var isOutRange = textViewMaxHight < textView1.intrinsicContentSize.height
+        while isOutRange {
+            textView1.text = String(textView1.text.dropLast())
+            textView1.invalidateIntrinsicContentSize()
+            isOutRange = textViewMaxHight < textView1.intrinsicContentSize.height
+            printnum += 1
+        }
+        print(printnum)
+        
+        
+        print("intrinstic_re",textView1.intrinsicContentSize)
+        
+        if textViewMaxHight < textView1.intrinsicContentSize.height {
+            textView1.text = String(textView1.text.dropLast())
+        }
+        
+        textView1.constraints.forEach { (constraint) in
+            if constraint.firstAttribute == .height {
+                constraint.constant = min(textViewMaxHight,textView1.intrinsicContentSize.height)
+                
+                print("coSet")
+            }
+        }
+         
         
         //out of range
         if textView1.text.count == 0 {
@@ -60,6 +84,7 @@ extension ViewController: UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
         print(textView1.text.count)
+        /*
         let size = CGSize(width: textView.frame.width, height: .infinity)
         //sizeThatFits:引数のCGSizeより小さい、textViewのちょうど良いサイズを求める。
         //LabelやTextViewなどは中のテキストが全部表示されるようなサイズが求められる
@@ -76,6 +101,7 @@ extension ViewController: UITextViewDelegate {
             }
         }
         print("height",textViewMaxHight,estimatedSize.height)
+        */
     }
     
 }

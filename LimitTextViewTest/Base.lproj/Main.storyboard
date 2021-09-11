@@ -19,6 +19,9 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" text="Lorem" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8Fq-95-CPN">
                                 <rect key="frame" x="87" y="70" width="240" height="33"/>
                                 <color key="backgroundColor" systemColor="systemIndigoColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="33" id="N2t-kN-OMH"/>
+                                </constraints>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
